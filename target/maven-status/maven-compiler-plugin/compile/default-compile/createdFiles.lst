@@ -1,0 +1,11 @@
+kaike\project\resources\PacienteResource.class
+kaike\project\javaapi\JakartaRestConfiguration.class
+kaike\project\model\DatabaseConnection.class
+kaike\project\dao\PacienteDAO.class
+kaike\project\exceptions\CpfDuplicadoException.class
+kaike\project\exceptions\PacienteNaoEncontradoException.class
+kaike\project\exceptions\CpfException.class
+kaike\project\exceptions\PacienteQueryException.class
+kaike\project\model\Paciente.class
+kaike\project\exceptions\CpfAssociadoException.class
+kaike\project\controller\PacienteController.class
