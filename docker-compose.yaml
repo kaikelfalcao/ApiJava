@@ -3,22 +3,22 @@ version: '3'
 services:
   api:
     container_name: api
-    image: bitnami/wildfly
+    image: docker.io/bitnami/wildfly:30
     environment:
-      DATABASE_URL: "jdbc:postgresql://hospital:5432/hospital"
+      DATABASE_URL: "jdbc:postgresql://db:5432/hospital"
       DATABASE_USER: "postgres"
-      DATABASE_PASSWORD: "postgres"
-      WILDFLY_USERNAME: "admin"
-      WILDFLY_PASSWORD: "admin"
+      DATABASE_PASSWORD: "123kaike123"
+      WILDFLY_USERNAME: "adminwildfly"
+      WILDFLY_PASSWORD: "adminwildfly"
     ports:
       - "8080:8080"
       - "9990:9990"
     volumes:
-      - .C:\wildfly\standalone\deployments:/opt/bitnami/wildfly/standalone/deployments
+      - .\deploy:/opt/bitnami/wildfly/standalone/deployments
     depends_on:
       - postgres
     networks:
-      - default
+      - mynetwork
     restart: always
 
   postgres:
@@ -31,10 +31,11 @@ services:
       - "5432:5432"
     volumes:
       - .\database\data:/var/lib/postgresql/data
-#      - ./pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf
+      - .\sql\data.sql:/docker-entrypoint-initdb.d/01-basegeografica.sql
+      - .\sql\pg_hba.conf:/etc/postgresql/pg_hba.conf
 #      - ./postgresql.conf:/var/lib/postgresql/data/postgresql.conf
     networks:
-      - default
+      - mynetwork
     restart: always
       
   pgadmin:
@@ -47,9 +48,9 @@ services:
     depends_on:
       - postgres
     networks:
-      - default
+      - mynetwork
     restart: always
 
 networks: 
-  default:
-    name: rede
+  mynetwork:  
+    driver: bridge  
