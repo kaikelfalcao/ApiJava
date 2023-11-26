@@ -8,11 +8,11 @@ package kaike.project.exceptions;
  *
  * @author kaike
  */
-public class PacienteQueryException extends Exception {
+public class QueryException extends Exception {
     
     private String tipoOperacao;
 
-    public PacienteQueryException(String tipoOperacao, String mensagem) {
+    public QueryException(String tipoOperacao, String mensagem) {
         super(mensagem);
         this.tipoOperacao = tipoOperacao;
     }

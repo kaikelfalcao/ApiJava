@@ -8,9 +8,9 @@ package kaike.project.exceptions;
  *
  * @author kaike
  */
-public class PacienteNaoEncontradoException extends Exception{
+public class NaoEncontradoException extends Exception{
 
-    public PacienteNaoEncontradoException(String message) {
+    public NaoEncontradoException(String message) {
         super(message);
     }
 }

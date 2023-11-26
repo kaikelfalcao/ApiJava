@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import kaike.project.exceptions.PacienteNaoEncontradoException;
-import kaike.project.exceptions.PacienteQueryException;
+import kaike.project.exceptions.NaoEncontradoException;
+import kaike.project.exceptions.QueryException;
 import kaike.project.model.DatabaseConnection;
 import kaike.project.model.Paciente;
 
@@ -19,7 +19,7 @@ public class PacienteDAO {
 
     private final Connection connection = (Connection) DatabaseConnection.getConnection();
 
-    public Paciente obterPacientePorCPF(String cpf) throws PacienteNaoEncontradoException {
+    public Paciente obterPacientePorCPF(String cpf) throws NaoEncontradoException {
         Paciente paciente = null;
         String sql = "SELECT * FROM paciente WHERE cpf = ?";
 
@@ -41,7 +41,7 @@ public class PacienteDAO {
             }
 
             if (paciente == null) {
-                throw new PacienteNaoEncontradoException("Paciente não encontrado para o CPF: " + cpf);
+                throw new NaoEncontradoException("Paciente não encontrado para o CPF: " + cpf);
             }
 
         } catch (SQLException ex) {
@@ -72,7 +72,7 @@ public class PacienteDAO {
         return pacientes;
     }
 
-    public void salvar(Paciente paciente) throws PacienteQueryException {
+    public void salvar(Paciente paciente) throws QueryException {
 
         String sql = "INSERT INTO paciente (cpf, nome, dtnascimento, endereco, email, planosaude, numcarteirinhaplanosaude) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -88,11 +88,11 @@ public class PacienteDAO {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-            throw new PacienteQueryException("salvar", ex.getMessage());
+            throw new QueryException("salvar", ex.getMessage());
         }
     }
 
-    public void atualizar(Paciente paciente, String cpfOriginal) throws PacienteQueryException {
+    public void atualizar(Paciente paciente, String cpfOriginal) throws QueryException {
 
         String sql = "UPDATE paciente SET nome = ?, dtnascimento = ?, endereco = ?, email = ?, planosaude = ?, numcarteirinhaplanosaude = ? WHERE cpf = ?";
 
@@ -104,16 +104,16 @@ public class PacienteDAO {
             preparedStatement.setString(5, paciente.getPlanoSaude());
             preparedStatement.setString(6, paciente.getNumCarteirinhaPlanoSaude());
             preparedStatement.setString(7, cpfOriginal);
-            
+
             preparedStatement.executeUpdate();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-            throw new PacienteQueryException("atualizar", ex.getMessage());
+            throw new QueryException("atualizar", ex.getMessage());
         }
     }
 
-    public void remover(String cpf) throws PacienteQueryException {
+    public void remover(String cpf) throws QueryException {
 
         String sql = "DELETE FROM paciente WHERE cpf = ?";
 
@@ -124,7 +124,7 @@ public class PacienteDAO {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-            throw new PacienteQueryException("salvar", ex.getMessage());
+            throw new QueryException("salvar", ex.getMessage());
         }
 
     }
@@ -133,7 +133,7 @@ public class PacienteDAO {
 
         boolean podeAlterar = true;
 
-        String sql = "SELECT count(*) FROM atendimento WHERE pacientecpf = ?";
+        String sql = "SELECT count(*) FROM atendimento WHERE cpfpaciente = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, cpf);
