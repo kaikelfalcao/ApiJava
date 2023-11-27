@@ -38,6 +38,9 @@ CREATE TABLE atendimento (
     FOREIGN KEY (cpfusuario) REFERENCES usuario(cpf)
 );
 
+ALTER TABLE atendimento
+MODIFY COLUMN numeroatendimento INT NOT NULL AUTO_INCREMENT PRIMARY KEY;
+
 INSERT INTO usuario (cpf, login, senha) VALUES
 ('12345678901', 'kaike', 'epic7'),
 ('98765432101', 'henrique', 'spCampeao'),
@@ -54,9 +57,9 @@ INSERT INTO paciente (cpf, nome, dtnascimento, endereco, email, planosaude, numc
 ('99988877766', 'Lucas Santos', '2000-07-10', 'Travessa dos Alamos, 789', 'lucas@email.com', 'Particular', 'P98765');
 
 
-INSERT INTO atendimento (numeroatendimento, cpfpaciente, nomepaciente, cpfusuario, descricaoatendimento, dataatendimento, valorcobrado, tipoatendimento) VALUES
-(1, '12345678901', 'Kaike Falcão', '12345678901', 'Consulta médica', '2023-10-04', 100.00, 'consulta'),
-(2, '98765432101', 'Maria Luisa', '12345678901', 'Exame laboratorial', '2023-10-05', 50.00, 'exame'),
-(3, '11122233344', 'Ana Silva', '55566677788', 'Consulta pediátrica', '2023-10-06', 120.00, 'consulta'),
-(4, '55566677788', 'Carlos Oliveira', '99988877766', 'Tomografia', '2023-10-07', 300.00, 'exame'),
-(5, '99988877766', 'Lucas Santos', '11122233344', 'Acompanhamento clínico', '2023-10-08', 80.00, 'consulta');
+INSERT INTO atendimento (cpfpaciente, nomepaciente, cpfusuario, descricaoatendimento, dataatendimento, valorcobrado, tipoatendimento) VALUES
+('12345678901', 'Kaike Falcão', '12345678901', 'Consulta médica', '2023-10-04', 100.00, 'consulta'),
+('98765432101', 'Maria Luisa', '12345678901', 'Exame laboratorial', '2023-10-05', 50.00, 'exame'),
+('11122233344', 'Ana Silva', '55566677788', 'Consulta pediátrica', '2023-10-06', 120.00, 'consulta'),
+('55566677788', 'Carlos Oliveira', '99988877766', 'Tomografia', '2023-10-07', 300.00, 'exame'),
+('99988877766', 'Lucas Santos', '11122233344', 'Acompanhamento clínico', '2023-10-08', 80.00, 'consulta');
