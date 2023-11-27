@@ -39,17 +39,24 @@ CREATE TABLE atendimento (
 );
 
 INSERT INTO usuario (cpf, login, senha) VALUES
-('12345678901', 'usuario1', 'senha1234'),
-('98765432101', 'usuario2', 'senha5678'),
-('01234567891', 'usuario3', 'senha9012');
+('12345678901', 'kaike', 'epic7'),
+('98765432101', 'henrique', 'spCampeao'),
+('11122233344', 'ana', 'senha123'),
+('55566677788', 'carlos', 'senhasegura'),
+('99988877766', 'lucas', 'minhasenha');
 
 
 INSERT INTO paciente (cpf, nome, dtnascimento, endereco, email, planosaude, numcarteirinhaplanosaude) VALUES
-('12345678901', 'Paciente 1', '1980-01-01', 'Rua das Flores, 123', 'paciente1@email.com', 'Unimed', '1234567890'),
-('98765432101', 'Paciente 2', '1985-02-02', 'Rua das Rosas, 321', 'paciente2@email.com', 'Bradesco Saúde', '9876543210'),
-('01234567891', 'Paciente 3', '1990-03-03', 'Rua dos Cravos, 432', 'paciente3@email.com', 'Amil', '0123456789');
+('12345678901', 'Kaike Falcão', '2004-05-20', 'Rua das Flores, 123', 'kaike@email.com', 'Unimed', 'Particular'),
+('98765432101', 'Maria Luisa', '2003-08-28', 'Rua das Rosas, 321', 'luisa@email.com', 'SUS', '9876543210'),
+('11122233344', 'Ana Silva', '1990-03-15', 'Avenida Principal, 456', 'ana@email.com', 'Amil', 'A12345'),
+('55566677788', 'Carlos Oliveira', '1985-11-22', 'Rua Central, 789', 'carlos@email.com', 'Unimed', 'U54321'),
+('99988877766', 'Lucas Santos', '2000-07-10', 'Travessa dos Alamos, 789', 'lucas@email.com', 'Particular', 'P98765');
+
 
 INSERT INTO atendimento (numeroatendimento, cpfpaciente, nomepaciente, cpfusuario, descricaoatendimento, dataatendimento, valorcobrado, tipoatendimento) VALUES
-(1, '12345678901', 'Paciente 1', '12345678901', 'Consulta médica', '2023-10-04', 100.00, 'consulta'),
-(2, '98765432101', 'Paciente 2', '12345678901', 'Exame laboratorial', '2023-10-05', 50.00, 'exame'),
-(3, '01234567891', 'Paciente 3', '12345678901', 'Fisioterapia', '2023-10-06', 80.00, 'sessão');
+(1, '12345678901', 'Kaike Falcão', '12345678901', 'Consulta médica', '2023-10-04', 100.00, 'consulta'),
+(2, '98765432101', 'Maria Luisa', '12345678901', 'Exame laboratorial', '2023-10-05', 50.00, 'exame'),
+(3, '11122233344', 'Ana Silva', '55566677788', 'Consulta pediátrica', '2023-10-06', 120.00, 'consulta'),
+(4, '55566677788', 'Carlos Oliveira', '99988877766', 'Tomografia', '2023-10-07', 300.00, 'exame'),
+(5, '99988877766', 'Lucas Santos', '11122233344', 'Acompanhamento clínico', '2023-10-08', 80.00, 'consulta');

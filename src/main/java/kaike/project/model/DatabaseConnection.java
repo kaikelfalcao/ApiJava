@@ -15,27 +15,15 @@ public class DatabaseConnection {
     private static Connection conn;
 
     private DatabaseConnection() {
+        String url = System.getenv("DATABASE_URL");
+        String username = System.getenv("DATABASE_USER");
+        String password = System.getenv("DATABASE_PASSWORD");
         try {
-            Properties properties = new Properties();
-            properties.load(getClass().getClassLoader().getResourceAsStream(".env"));
-            String url = properties.getProperty("DATABASE_URL");
-            String username = properties.getProperty("DATABASE_USERNAME");
-            String password = properties.getProperty("DATABASE_PASSWORD");
-
-            try {
-                conn = DriverManager.getConnection(url, username, password);
-            } catch (SQLException ex) {
-                Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        } catch (FileNotFoundException ex) {
+            conn = DriverManager.getConnection(url, username, password);
+        } catch (SQLException ex) {
             Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
-
         }
     }
-    
 
     public static Connection getConnection() {
         if (instance == null) {

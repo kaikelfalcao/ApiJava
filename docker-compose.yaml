@@ -3,11 +3,11 @@ version: '3'
 services:
   api:
     container_name: api
-    image: docker.io/bitnami/wildfly:30
+    image: api
     environment:
       DATABASE_URL: "jdbc:postgresql://db:5432/hospital"
       DATABASE_USER: "postgres"
-      DATABASE_PASSWORD: "123kaike123"
+      DATABASE_PASSWORD: "postgres"
       WILDFLY_USERNAME: "adminwildfly"
       WILDFLY_PASSWORD: "adminwildfly"
     ports:
